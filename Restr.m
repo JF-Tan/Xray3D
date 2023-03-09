@@ -1,42 +1,41 @@
 clear;clc;
-re_size = 1000;
-I= (imread('./0/1.tif'));I = imresize(I,[re_size,re_size]);
+re_size = 2400;
+I= (imread('./0/1.tif'));
+
 [H,W]=size(I);
+ratio = H/1000;
 %===========³£Êý====================
 xMin = 1;
-xMax = W+1;
+xMax = 1000;
 yMin = 1;
-yMax = H+1;
-zMin = -149;
-zMax = 150;
+yMax = 1000;
+zMin = -100;
+zMax = 99;
 zRange = zMax - zMin + 1;
-centX = W / 2.0;
-centY = H / 2.0;
+centX = 500;
+centY = 500;
 xMax = xMax - xMin;
 yMax = yMax - yMin;
 xMin = 1;
 yMin = 1;
-voxelData = zeros(1,W,H,zRange);
+voxelData = zeros(1,1000,1000,200);
 for k=1:1
 %=====================================
 shootAngle = (360/64)*(k);
 rotateAngle = 30;
-I= double(imread('./0/1.tif')); I = imresize(I,[re_size,re_size]);
-%
+I= double(imread('./0/1.tif'));
 %=====================================
 cosThita = cos(shootAngle*0.0175);
 sinThita = sin(shootAngle*0.0175);
 tanAlf   = tan(rotateAngle*0.0175);
 %===========================
-for z=1:zRange
+for z=1:200
     zIndex = z + zMin;
-    for y=yMin:yMax
-        for x=(xMin):xMax
-            dx = (x-centX);
-            dy = (y-centY);
-            i = round(x+zIndex*tanAlf*cosThita);
-            j = round(y+zIndex*tanAlf*sinThita);
-            if(i<1||j<1||i>(W)||j>H)
+    for y=1:1000
+        for x=1:1000
+            i = round((x+zIndex*tanAlf*cosThita) *ratio)  ;
+            j = round((y+zIndex*tanAlf*sinThita) *ratio) ;
+            if(i<1||j<1||i>(H)||j>W)
                 continue;
             end
             val = I(j,i);
@@ -49,9 +48,9 @@ end
 
 EP = squeeze(sum(voxelData));
 
-px = xMin : 1 : xMax;
-py = yMin : 1 : yMax;
-pz = 1 : 1 : zRange;
+px = 1 : 1 : 1000;
+py = 1 : 1 : 1000;
+pz = 1 : 1 : 200;
 E = permute(EP,[2,1,3]);
 [X,Y,Z] = meshgrid(px,py,pz);
 Vq = interp3(px,py,pz,E,X,Y,Z);
