@@ -29,24 +29,28 @@ cosThita = cos(shootAngle*0.0175);
 sinThita = sin(shootAngle*0.0175);
 tanAlf   = tan(rotateAngle*0.0175);
 %===========================
-for z=1:200
-    zIndex = z + zMin;
-    for y=1:1000
-        for x=1:1000
-            i = round((x+zIndex*tanAlf*cosThita) *ratio)  ;
-            j = round((y+zIndex*tanAlf*sinThita) *ratio) ;
-            if(i<1||j<1||i>(H)||j>W)
-                continue;
+    for z=1:200
+        zIndex = z + zMin;
+        for y=1:1000
+            for x=1:1000
+                i = round((x+zIndex*tanAlf*cosThita) *ratio)  ;
+                j = round((y+zIndex*tanAlf*sinThita) *ratio) ;
+                if(i<1||j<1||i>(H)||j>W)
+                    continue;
+                end
+                val = I(j,i);
+                voxelData(k+1,x,y,z)=val;
             end
-            val = I(j,i);
-            voxelData(k+1,x,y,z)=val;
         end
     end
-end
 end
 %%=================== ³ÉÏñ ================================
 
 EP = squeeze(sum(voxelData));
+
+EP=( EP*255/(  max(max(max(EP))) - min(min(min(EP)))  ));
+
+EP = log(20+EP);
 
 px = 1 : 1 : 1000;
 py = 1 : 1 : 1000;
@@ -58,3 +62,8 @@ figure
 slice(X,Y,Z,Vq,[px(1) px(end)],[py(1) py(end)],[pz(1) pz(end)]);
 shading flat
 colormap(gray)
+
+%% 
+
+
+
