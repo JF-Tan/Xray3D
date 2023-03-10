@@ -22,3 +22,4 @@ figure
 slice(X,Y,Z,Vq,[px(1) px(end)],[py(1) py(end)],[pz(1) pz(end)]);
 shading flat
 colormap(gray)
+alpha(0.8)
