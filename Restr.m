@@ -1,12 +1,11 @@
 clear;clc;
-re_size = 2400;
-I= (imread('./0/1.tif'));
-
+I= (imread('1.tif'));
 [H,W]=size(I);
-
 %===========³£Êý====================
-IMGING_H = 2000;
-IMGING_W = 2000;
+IMGING_H = 1000;
+IMGING_W = 1000;
+ratio_x =  H / IMGING_H;
+ratio_y = W / IMGING_W;
 xMin = 1;
 xMax = 1000;
 yMin = 1;
@@ -21,11 +20,14 @@ yMax = yMax - yMin;
 xMin = 1;
 yMin = 1;
 voxelData = zeros(1,IMGING_H,IMGING_W,200);
-for k=1:1
+%===============================
+shootAngles=[(360/64)*(0),(360/64)*(32)];
+imgs = ['01_filtered.bmp';'33_filtered.bmp'];
+for k=1:2
 %=====================================
-shootAngle = (360/64)*(k);
+shootAngle = shootAngles(k);
 rotateAngle = -30;
-I= double(imread('./0/1.tif'));
+I= double(imread(imgs(k,:)));
 %=====================================
 cosThita = cos(shootAngle*0.0175);
 sinThita = sin(shootAngle*0.0175);
@@ -35,8 +37,8 @@ tanAlf   = tan(rotateAngle*0.0175);
         zIndex = z + zMin;
         for y=1:IMGING_H
             for x=1:IMGING_W
-                i = round((x+zIndex*tanAlf*cosThita) )  ;
-                j = round((y+zIndex*tanAlf*sinThita) ) ;
+                i = round((x*ratio_y+zIndex*tanAlf*cosThita) )  ;
+                j = round((y*ratio_x+zIndex*tanAlf*sinThita) ) ;
                 if(i<1||j<1||i>(H)||j>W)
                     continue;
                 end
