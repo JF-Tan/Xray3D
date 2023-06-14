@@ -3,6 +3,8 @@
 *.jpg
 *.png
 
-.vscode/
+.vscode/*
 
 cpp/build/*
+
+cpp/vscode/*
