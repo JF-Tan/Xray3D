@@ -1,9 +1,0 @@
-/home/tanee/GitHub/Xray3D/cpp/build/CMakeFiles/xray3d.dir
-/home/tanee/GitHub/Xray3D/cpp/build/CMakeFiles/xray3d-test.dir
-/home/tanee/GitHub/Xray3D/cpp/build/CMakeFiles/test.dir
-/home/tanee/GitHub/Xray3D/cpp/build/CMakeFiles/edit_cache.dir
-/home/tanee/GitHub/Xray3D/cpp/build/CMakeFiles/rebuild_cache.dir
-/home/tanee/GitHub/Xray3D/cpp/build/CMakeFiles/list_install_components.dir
-/home/tanee/GitHub/Xray3D/cpp/build/CMakeFiles/install.dir
-/home/tanee/GitHub/Xray3D/cpp/build/CMakeFiles/install/local.dir
-/home/tanee/GitHub/Xray3D/cpp/build/CMakeFiles/install/strip.dir

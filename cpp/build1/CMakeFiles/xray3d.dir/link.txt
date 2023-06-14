@@ -1,1 +1,0 @@
-/usr/bin/c++ -fPIC -O3 -DNDEBUG -shared -Wl,-soname,libxray3d.so -o libxray3d.so CMakeFiles/xray3d.dir/src/restr.cpp.o 

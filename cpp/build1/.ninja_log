@@ -1,5 +1,0 @@
-# ninja log v5
-0	855	1686734244	CMakeFiles/xray3d-test.dir/test/main_test.cpp.o	c14ae6e90b524602
-0	887	1686734244	CMakeFiles/xray3d.dir/src/restr.cpp.o	91b7cb99ca9e18f4
-887	926	1686734244	libxray3d.so	170c0f2e8a1fa407
-926	973	1686734244	xray3d-test	20f3b1f9bcc9a649
