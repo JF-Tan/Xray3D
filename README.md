@@ -7,7 +7,7 @@
 
 install this repo with :
 ```
-git clone https://github.com/Takk-Tanee/Xray3D.git
+git clone https://github.com/JF-Tan/Xray3D.git
 ```
 
 This repo developed the CT-Xray3D Reconstruction algorithm with 3 language programs :cpp、Matlab、Python.About them you can follow the tutorial at:
