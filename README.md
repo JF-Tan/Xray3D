@@ -10,14 +10,14 @@ install this repo with :
 git clone https://github.com/Takk-Tanee/Xray3D.git
 ```
 
-This repo developed CT-Xray3D Restruction alogrithm with 3 language programs :cpp、Matlab、Python.About them you can follow the tutorial in:
+This repo developed the CT-Xray3D Reconstruction algorithm with 3 language programs :cpp、Matlab、Python.About them you can follow the tutorial at:
 - cpp:https://www.w3schools.com/cpp/
 - Matlab:https://ww2.mathworks.cn/support/learn-with-matlab-tutorials.html
 - python:https://www.w3schools.com/python/
 
 ## 2.Repo Structure
 
-Here we explain this repo's stucture .
+Here we explain this repo's structure .
 
 ```
 .
