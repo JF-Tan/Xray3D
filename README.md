@@ -1,7 +1,7 @@
 # Xray3D
 
 ## 1.Introduction
-## This is a dev-repo in CT-Xray3D Restruction alogrithm
+## This is a dev-repo in CT-Xray3D Reconstruction algorithm
 
 `author`:Tanee(taneey0519@gmail.com)
 
