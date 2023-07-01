@@ -35,7 +35,7 @@
 proc checkRequiredFiles { origin_dir} {
   set status true
   set paths [list \
- "[file normalize "$origin_dir/[file normalize "$origin_dir/../../../hls_project/Xray3D/ip"]"]"\
+ "[file normalize "$origin_dir/[file normalize "$origin_dir/../../../ip_project/verilog"]"]"\
   ]
   foreach ipath $paths {
     if { ![file isdirectory $ipath] } {
