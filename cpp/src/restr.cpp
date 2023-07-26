@@ -114,11 +114,55 @@ void xray3d::restr::run_shifts_single(string img_path, int VX, int VY, int VZ, i
         y_off = max(y_off, 0);
         x_off = min(x_off, VX - 1);
         y_off = min(y_off, VY - 1);
+        cout << x_off << ",\n";
+        cout << y_off << ",\n";
         int voxel_z_offset = z * x.cols * x.rows;
         int voxel_xy_offset = (y_off)*x.cols + x_off;
         memcpy(voxel_space + voxel_z_offset + voxel_xy_offset, x.data, sizeof(xray3d::xray3d_t) * x.cols * x.rows);
     }
 
+    gettimeofday(&tend, NULL);
+    timeUsed = 1000000 * (tend.tv_sec - tstart.tv_sec) + tend.tv_usec - tstart.tv_usec;
+    cout << " Time=" << timeUsed / 1000 << " ms" << endl;
+}
+
+void sum_2voxel(xray3d::xray3d_t *&voxel_space, xray3d::xray3d_t *&voxel_space_tmp)
+{
+    for (int i = 0; i < 200 * 1000 * 1000; i++)
+    {
+        voxel_space[i] += voxel_space_tmp[i];
+    }
+}
+
+void xray3d::restr::run_muti(string img_path, int VX, int VY, int VZ, int groups_num, int a, xray3d::xray3d_t *&voxel_space)
+{
+    xray3d::xray3d_t *voxel_space_tmp = (xray3d::xray3d_t *)malloc(sizeof(xray3d::xray3d_t) * 200 * 1000 * 1000);
+    std::vector<cv::String> img_names;
+    cv::glob(img_path, img_names);
+    int *maps = create_maps(a, groups_num, VZ);
+    struct timeval tstart, tend;
+    double timeUsed;
+    gettimeofday(&tstart, NULL);
+    for (int k = 0; k < groups_num; k++)
+    {
+        cout << k + 1 << "/" << groups_num << endl;
+        cv::Mat x = cv::imread(img_names[k], 0);
+        for (int z = 0; z < VZ; z++)
+        {
+            cv::Mat bg = x.clone();
+            int x_off = maps[k * (VZ * 2) + z * 2 + 0];
+            int y_off = maps[k * (VZ * 2) + z * 2 + 1];
+            x_off = max(x_off, 0);
+            y_off = max(y_off, 0);
+            x_off = min(x_off, VX - 1);
+            y_off = min(y_off, VY - 1);
+
+            int voxel_z_offset = z * x.cols * x.rows;
+            int voxel_xy_offset = (y_off)*x.cols + x_off;
+            memcpy(voxel_space_tmp + voxel_z_offset + voxel_xy_offset, x.data, sizeof(xray3d::xray3d_t) * x.cols * x.rows);
+            sum_2voxel(voxel_space, voxel_space_tmp);
+        }
+    }
     gettimeofday(&tend, NULL);
     timeUsed = 1000000 * (tend.tv_sec - tstart.tv_sec) + tend.tv_usec - tstart.tv_usec;
     cout << " Time=" << timeUsed / 1000 << " ms" << endl;
